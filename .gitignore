@@ -34,7 +34,6 @@
 
 /public/packs
 /public/packs-test
-/node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
@@ -43,3 +42,4 @@ yarn-debug.log*
 Gemfile.lock
 package-lock.json
 yarn.lock
+node_modules/

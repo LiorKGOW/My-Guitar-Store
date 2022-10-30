@@ -1,6 +1,11 @@
 {
   "name": "rails-app",
   "private": true,
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+  },  
   "dependencies": {
     "@babel/preset-react": "^7.18.6",
     "@patternfly/patternfly": "^4.202.1",
@@ -26,6 +31,11 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "eslint": ">=5.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "prettier": "^2.7.1",
     "resolve-url-loader": "^5.0.0",
     "webpack-dev-server": "^3"
   }

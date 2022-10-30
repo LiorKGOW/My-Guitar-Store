@@ -12,7 +12,7 @@ export const Users = () => {
       } catch (error) {
         console.error(error);
       }
-    }; 
+    };
     getUser();
   }, []);
 
@@ -22,8 +22,8 @@ export const Users = () => {
         Users:
       </Title>
       <List>
-        {users.map(user => (
-          <ListItem>{user}</ListItem>
+        {users.map((user, index) => (
+          <ListItem key={index}>{user}</ListItem>
         ))}
       </List>
     </div>

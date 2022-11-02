@@ -8,7 +8,7 @@ import GuitarInfo from './GuitarInfo';
 export const GuitarGallery = () => {
   const getGuitars = async () => {
     try {
-      const response = await axios.get('/guitars');
+      const response = await axios.get('/');
       if (response.data) {
         setGuitars(response.data);
       }

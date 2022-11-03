@@ -1,17 +1,4 @@
-# The behavior of RuboCop can be controlled via the .rubocop.yml
-# configuration file. It makes it possible to enable/disable
-# certain cops (checks) and to alter their behavior if they accept
-# any parameters. The file can be placed either in your home
-# directory or in some project directory.
-#
-# RuboCop will start looking for the configuration file in the directory
-# where the inspected file is and continue its way up to the root directory.
-#
-# See https://docs.rubocop.org/rubocop/configuration
-
-Enabled: true
-
-name: RuboCop
+name: rubocop
 on: [push, pull_request]
 env:
   BUNDLE_WITHOUT: assets:console:development:dynflow_sidekiq:ec2:gce:journald:jsonp:libvirt:openid:openstack:ovirt:redis:service:telemetry:vmware

@@ -1,5 +1,5 @@
 name: rubocop
-on: [push, pull_request]
+on: [pull_request]
 env:
   BUNDLE_WITHOUT: assets:console:development:dynflow_sidekiq:ec2:gce:journald:jsonp:libvirt:openid:openstack:ovirt:redis:service:telemetry:vmware
 permissions:

@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Title, TitleSizes, Gallery } from '@patternfly/react-core';
+import { Title, TitleSizes, Gallery, Spinner } from '@patternfly/react-core';
 import GuitarInfo from './GuitarInfo';
-import guitarsUrl from '../constUrls';
-import styled from 'styled-components';
-
-// is used in order to present a Loading 'screen' to the user until the data is rendered:
-const Loader = styled.div``;
+import { guitarsUrl } from './constants';
 
 // Loading the data from the server:
 
-export const GuitarGallery = () => {
+const GuitarGallery = () => {
   const getGuitars = async () => {
     try {
       const response = await axios.get(guitarsUrl);
@@ -42,7 +38,7 @@ export const GuitarGallery = () => {
           '2xl': '300px'
         }}>
         {guitars.length === 0 ? (
-          <Loader>Loading...</Loader>
+          <Spinner isSVG aria-label="Contents of the Guitar Gallery" aria-valuetext="Loading..." />
         ) : (
           guitars.map(({ name, url, price, description }) => (
             <GuitarInfo key={name} name={name} url={url} price={price} description={description} />
@@ -52,3 +48,5 @@ export const GuitarGallery = () => {
     </div>
   );
 };
+
+export default GuitarGallery;

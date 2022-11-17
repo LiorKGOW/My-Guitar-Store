@@ -3,7 +3,7 @@
 // of the page.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { GuitarGallery } from '../components/GuitarGallery';
+import GuitarGallery from '../components/GuitarGallery';
 import './fonts.css';
 
 document.addEventListener('DOMContentLoaded', () => {

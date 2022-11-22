@@ -183,16 +183,7 @@ module.exports = {
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
   // transformIgnorePatterns: ['/node_modules/', '\\.pnp\\.[^\\/]+$']
 
-  transformIgnorePatterns: [
-    'node_modules/(?!(react-native' +
-      '|react-navigation-tabs' +
-      '|react-native-splash-screen' +
-      '|react-native-screens' +
-      '|react-native-reanimated' +
-      ')/)',
-    'node_modules/(?!(jest-)?react-native|react-(native|universal|navigation)-(.*)|@react-native-community/(.*)|@react-navigation/(.*)|bs-platform|(@[a-zA-Z]+/)?(bs|reason|rescript)-(.*)+)',
-    '/node_modules/'
-  ]
+  transformIgnorePatterns: ['/node_modules/']
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

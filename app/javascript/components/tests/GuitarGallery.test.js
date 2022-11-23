@@ -1,15 +1,18 @@
 import React from 'react';
-import { render, screen /*, waitForElement*/ } from '@testing-library/react';
+import { waitFor, render, screen /*, waitForElement*/ } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import axios from 'axios';
 import GuitarGallery from '../GuitarGallery.js';
 import { guitarsUrl } from '../constants';
 import { guitarData } from './fixtures';
+// import { act } from 'react-dom/test-utils/index.js';
 
 test("show loader when it's fetching data, then render Guitars", async () => {
-  axios.get.mockResolvedValueOnce(guitarData);
+  await axios.get.mockResolvedValueOnce(guitarData);
   //show loader
-  const { unmount /*, getAllByTestId, getByText*/ } = render(<GuitarGallery />);
+  // act(() => {
+  // });
+  const { unmount /*, getAllByTestId*/, getByText, getByLabelText } = render(<GuitarGallery />);
   // expect(getByText(/loading.../i)).toBeInTheDocument();
 
   // check the correct url is called:
@@ -35,11 +38,28 @@ test("show loader when it's fetching data, then render Guitars", async () => {
   // });
 
   // ensure the title of the page is presented in the page:
-  expect(screen.getByText('Guitars For Sale:')).toBeInTheDocument();
+  expect(screen.getByText('Guitars For Sale:')).toBeInTheDocument(); // -> passes
 
   // ensure some content of the page is presented in the page:
-  expect(screen.getByText('some description in guitar1_test')).toBeInTheDocument();
-  expect(screen.getByText('some description in guitar2_test')).toBeInTheDocument();
+
+  // Option 2:
+  const title = getByText(/Guitars For Sale:/);
+  expect(title).toHaveTextContent('Guitars For Sale:'); // -> passes
+
+  // // fails:
+  // const galleryItem = getByLabelText(/galleryItem/);
+  // expect(galleryItem).toHaveTextContent('Description: some description in guitar1_test');
+
+  // const gallery = getByLabelText(/gallery/);
+  // expect(gallery).toHaveTextContent('Description: some description in guitar1_test');
+
+  // Option 1:
+  // expect(screen.getByRole('GuitarInfo')).toHaveTextContent('some description in guitar1_test');
+  await waitFor(() => screen.getByText('Description: some description in guitar1_test'));
+  // await waitFor(() => screen.getByText('Description: some description in guitar2_test'));
+
+  expect(screen.getByText('Description: some description in guitar1_test')).toBeInTheDocument();
+  expect(screen.getByText('Description: some description in guitar2_test')).toBeInTheDocument();
 
   // unmnount the component from the DOM
   unmount();

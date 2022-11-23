@@ -30,7 +30,6 @@ const GuitarGallery = () => {
         Guitars For Sale:
       </Title>
       <Gallery
-        htmlFor="gallery"
         hasGutter
         minWidths={{
           md: '100px',
@@ -42,14 +41,7 @@ const GuitarGallery = () => {
           <Spinner isSVG aria-label="Contents of the Guitar Gallery" aria-valuetext="Loading..." />
         ) : (
           guitars.map(({ name, url, price, description }) => (
-            <GuitarInfo
-              htmlFor="galleryItem"
-              key={name}
-              name={name}
-              url={url}
-              price={price}
-              description={description}
-            />
+            <GuitarInfo key={name} name={name} url={url} price={price} description={description} />
           ))
         )}
       </Gallery>

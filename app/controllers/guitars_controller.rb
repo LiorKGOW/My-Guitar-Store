@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/MethodLength
+
 class GuitarsController < ApplicationController
   def index
     render json: [
@@ -24,3 +26,5 @@ class GuitarsController < ApplicationController
     ]
   end
 end
+
+# rubocop:enable Metrics/MethodLength

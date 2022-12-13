@@ -25,6 +25,10 @@ class GuitarsController < ApplicationController
       }
     ]
   end
+
+  def guitar_gallery; end
+
+  def welcome_page; end
 end
 
 # rubocop:enable Metrics/MethodLength

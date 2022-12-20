@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'guitars/guitar_gallery'
   get 'guitars/welcome_page'
 
+  # Challenge route:
+  get 'guitars/contact'
+
   # route to get the mock data:
   get '/guitars', to: 'guitars#index'
 

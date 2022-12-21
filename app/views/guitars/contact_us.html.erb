@@ -1,0 +1,10 @@
+<h1>Contact</h1>
+
+<p>We are always happy to hear from our customers !</p>
+
+<p>Phone: <%= @phone_number %></p>
+
+<p>Press: <a href="mailto:press@nowhere.com">press@nowhere.com</a></p>
+<p>Or Press: <%= mail_to('press@nowhere.com') %></p>
+
+<%= link_to('Go to Welcome Page', {:action => 'welcome_page'}) %>

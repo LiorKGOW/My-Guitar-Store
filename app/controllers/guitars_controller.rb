@@ -25,6 +25,49 @@ class GuitarsController < ApplicationController
       }
     ]
   end
+
+  def guitar_gallery; end
+
+  def welcome_page; end
+
+  def contact
+    # redirect_to(:action => 'contact_us')
+
+    param = params['country']
+    @phone_number = nil
+
+    if param == 'us' || param == 'ca'
+      @phone_number = '(800) 555-6789'
+    elsif param == 'uk'
+      @phone_number = '(020) 7946-1234'
+    else
+      @phone_number = '+972 (052) 654-3210'
+    end
+
+    ##############################################
+    # another option: (Solution)
+
+    if ['us','ca'].include?(params[:country])
+      @phone_number = '(800) 555-6789'
+    elsif params[:country] == 'uk'
+      @phone_number = '(020) 7946-1234'
+    else
+      @phone_number = '+972 (052) 654-3210'
+    end
+
+    ##############################################
+    # another option: (Rubocop)
+
+    @phone_number = if %w[us ca].include?(params[:country])
+      '(800) 555-6789'
+    elsif params[:country] == 'uk'
+      '(020) 7946-1234'
+    else
+      '+972 (052) 654-3210'
+    end
+
+    render('contact_us')
+  end
 end
 
 # rubocop:enable Metrics/MethodLength

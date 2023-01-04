@@ -11,5 +11,11 @@ class GuitarsController < ApplicationController
 
   def edit; end
 
+  def create; end
+
+  def update; end
+
   def delete; end
+
+  def destroy; end
 end

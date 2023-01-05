@@ -1,0 +1,13 @@
+<div class="guitars new">
+ <h2>Create Guitar</h2>
+ 
+ <%= form_for(@guitar, :url => guitars_path, :method => 'post') do |f| %>
+ 
+   <%= render(:partial => 'form', :locals => {:f => f}) %>
+ 
+   <div class="form-buttons">
+     <%= f.submit("Create Guitar") %>
+   </div>
+ 
+ <% end %>
+</div>

@@ -1,0 +1,13 @@
+<div class="guitars edit">
+ <h2>Edit Guitar</h2>
+ 
+ <%= form_for(@guitar) do |f| %>
+ 
+   <%= render(:partial => 'form', :locals => {:f => f}) %>
+ 
+   <div class="form-buttons">
+     <%= f.submit("Update Guitar") %>
+   </div>
+ 
+ <% end %>
+</div>

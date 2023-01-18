@@ -10,10 +10,10 @@ import {
   CardFooter
 } from '@patternfly/react-core';
 
-const GuitarInfo = ({ name, url, price, description }) => {
+const GuitarInfo = ({ id, name, url, price, description }) => {
   return (
     <GalleryItem>
-      <Card id={name} isFlat>
+      <Card id={id} isFlat>
         <Grid md={6}>
           <GridItem>
             <img className="Guitar-Image" src={url} alt="Guitar Image" />
@@ -29,9 +29,10 @@ const GuitarInfo = ({ name, url, price, description }) => {
   );
 };
 GuitarInfo.propTypes = {
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired
 };
 

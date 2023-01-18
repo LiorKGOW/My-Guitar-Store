@@ -5,3 +5,6 @@ require: rubocop-rails
 
 Style/Documentation:
   Enabled: false
+
+Metrics/AbcSize:
+  Max: 25 

@@ -3,9 +3,9 @@
 // of the page.
 import React from 'react';
 import ReactDOM from 'react-dom';
-import GuitarGallery from '../components/GuitarGallery';
+import MyGuitarStore from '../components/MyGuitarStore';
 import './fonts.css';
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(<GuitarGallery />, document.body.appendChild(document.createElement('div')));
+  ReactDOM.render(<MyGuitarStore />, document.body.appendChild(document.createElement('div')));
 });

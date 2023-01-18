@@ -5,6 +5,21 @@ import GuitarGallery from './GuitarGallery';
 import { GUITARS_URL } from './constants.js';
 
 const MyGuitarStore = () => {
+  // Loading the data from the server:
+
+  const getGuitars = async () => {
+    try {
+      const response = await axios.get(GUITARS_URL);
+      if (response.data) {
+        setGuitars(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const [guitars, setGuitars] = useState([]);
+
   // Create Form:
 
   const initialFormValues = {
@@ -52,6 +67,7 @@ const MyGuitarStore = () => {
         price: priceValue,
         description: descriptionValue
       });
+      getGuitars();
     } catch (error) {
       console.log('Server have encountered an error:');
       console.log(error);
@@ -62,7 +78,7 @@ const MyGuitarStore = () => {
 
   return (
     <>
-      <GuitarGallery />
+      <GuitarGallery guitars={guitars} getGuitars={getGuitars} />
       <br />
       <Button variant="primary" onClick={openFormModal}>
         Create a New Guitar

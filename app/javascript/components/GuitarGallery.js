@@ -1,25 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
 import { Title, TitleSizes, Gallery, Spinner } from '@patternfly/react-core';
+import PropTypes from 'prop-types';
 import GuitarInfo from './GuitarInfo';
-import { GUITARS_URL } from './constants';
 
-// Loading the data from the server:
-
-const GuitarGallery = () => {
-  const getGuitars = async () => {
-    try {
-      const response = await axios.get(GUITARS_URL);
-      if (response.data) {
-        setGuitars(response.data);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const [guitars, setGuitars] = useState([]);
-
+const GuitarGallery = ({ guitars, getGuitars }) => {
   useEffect(() => {
     getGuitars();
   }, []);
@@ -54,6 +38,10 @@ const GuitarGallery = () => {
       </Gallery>
     </div>
   );
+};
+GuitarGallery.propTypes = {
+  guitars: PropTypes.array.isRequired,
+  getGuitars: PropTypes.func.isRequired
 };
 
 export default GuitarGallery;

@@ -2,7 +2,7 @@
   "name": "rails-app",
   "private": true,
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint --ext js,jsx,ts,tsx",
     "lint:fix": "eslint --fix",
     "test": "jest",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"

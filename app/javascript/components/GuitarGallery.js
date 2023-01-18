@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Title, TitleSizes, Gallery, Spinner } from '@patternfly/react-core';
 import GuitarInfo from './GuitarInfo';
-import { guitarsUrl } from './constants';
-
-// Loading the data from the server:
+import { GUITARS_URL } from './constants';
 
 const GuitarGallery = () => {
+  // Loading the data from the server:
+
   const getGuitars = async () => {
     try {
-      const response = await axios.get(guitarsUrl);
+      const response = await axios.get(GUITARS_URL);
       if (response.data) {
         setGuitars(response.data);
       }
@@ -40,8 +40,16 @@ const GuitarGallery = () => {
         {guitars.length === 0 ? (
           <Spinner isSVG aria-label="Contents of the Guitar Gallery" aria-valuetext="Loading..." />
         ) : (
-          guitars.map(({ name, url, price, description }) => (
-            <GuitarInfo key={name} name={name} url={url} price={price} description={description} />
+          guitars.map(({ id, name, url, price, description }) => (
+            <GuitarInfo
+              key={id}
+              id={id}
+              name={name}
+              url={url}
+              price={price}
+              description={description}
+              getGuitars={getGuitars}
+            />
           ))
         )}
       </Gallery>

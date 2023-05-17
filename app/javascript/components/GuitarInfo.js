@@ -11,14 +11,31 @@ import {
   CardFooter,
   Button,
   Modal,
+  AboutModal,
   ModalVariant,
   Form,
   FormGroup,
-  TextInput
+  TextInput,
+  TextContent,
+  TextList,
+  TextListItem
 } from '@patternfly/react-core';
 import { getGuitarUrlWithId } from './constants.js';
+import { logoUrl } from './constants.js';
 
 const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
+  // About Modal
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+
+  const openAboutModal = () => {
+    setIsAboutModalOpen(true);
+  };
+
+  const closeAboutModal = () => {
+    setIsAboutModalOpen(false);
+  };
+
+  // Form Modal
   const [isFormModalOpen, setIsFormModalOpen] = useState(false);
 
   const openFormModal = () => {
@@ -73,11 +90,11 @@ const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
           </GridItem>
           <GridItem>
             <CardTitle>{name}</CardTitle>
-            <CardBody>
-              Price: {price} <br />
-              Description: {description}
-            </CardBody>
+            <CardBody>Price: {price}</CardBody>
             <CardFooter>
+              <Button variant="primary" role="about-modal-button" onClick={openAboutModal}>
+                Check me out
+              </Button>
               <Button variant="secondary" onClick={openFormModal}>
                 Edit
               </Button>
@@ -148,6 +165,28 @@ const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
             </FormGroup>
           </Form>
         </Modal>
+      )}
+
+      {isAboutModalOpen && (
+        <AboutModal
+          isOpen={isAboutModalOpen}
+          onClose={closeAboutModal}
+          trademark="Trademark and stuff"
+          brandImageSrc={logoUrl}
+          brandImageAlt="Guitar Image"
+          productName={name}
+          backgroundImageSrc={url}>
+          <TextContent>
+            <TextList component="dl">
+              <TextListItem component="dt">Name: </TextListItem>
+              <TextListItem component="dd">{name}</TextListItem>
+              <TextListItem component="dt">Description: </TextListItem>
+              <TextListItem component="dd">{description}</TextListItem>
+              <TextListItem component="dt">Price: </TextListItem>
+              <TextListItem component="dd">{price}</TextListItem>
+            </TextList>
+          </TextContent>
+        </AboutModal>
       )}
     </GalleryItem>
   );

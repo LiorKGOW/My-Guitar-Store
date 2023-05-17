@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class GuitarsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:update]
+  skip_before_action :verify_authenticity_token, only: [:update, :destroy]
 
   def index
     render json: Guitar.all
@@ -30,5 +30,9 @@ class GuitarsController < ApplicationController
 
   def delete; end
 
-  def destroy; end
+  def destroy
+    # Find the Guitar in the DB with the recieved id:
+    @guitar = Guitar.find(params[:id])
+    @guitar.destroy
+  end
 end

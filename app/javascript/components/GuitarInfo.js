@@ -20,12 +20,16 @@ import {
   TextList,
   TextListItem
 } from '@patternfly/react-core';
+import { TimesIcon } from '@patternfly/react-icons/dist/esm/icons/times-icon';
 import { getGuitarUrlWithId } from './constants.js';
 import { logoUrl } from './constants.js';
 
 const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
-  // About Modal
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false);
+  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // Read Functions:
 
   const openAboutModal = () => {
     setIsAboutModalOpen(true);
@@ -35,8 +39,7 @@ const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
     setIsAboutModalOpen(false);
   };
 
-  // Form Modal
-  const [isFormModalOpen, setIsFormModalOpen] = useState(false);
+  // Update Funcitons:
 
   const openFormModal = () => {
     setIsFormModalOpen(true);
@@ -81,14 +84,41 @@ const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
     }
   };
 
+  // Delete Functions:
+
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+
+  const destroyGuitar = async () => {
+    closeDeleteModal();
+
+    const updatedGuitarToDeleteUrl = getGuitarUrlWithId(id);
+
+    try {
+      await axios.delete(updatedGuitarToDeleteUrl);
+      getGuitars();
+    } catch (error) {
+      console.log('Server have encountered an error:');
+      console.log(error);
+    }
+  };
+
   return (
     <GalleryItem>
-      <Card id={name} isFlat>
+      <Card id={id} isFlat>
         <Grid md={6}>
           <GridItem>
             <img className="Guitar-Image" src={url} alt="Guitar Image" />
           </GridItem>
           <GridItem>
+            <Button variant="plain" aria-label="Action" onClick={openDeleteModal}>
+              <TimesIcon />
+            </Button>
             <CardTitle>{name}</CardTitle>
             <CardBody>Price: {price}</CardBody>
             <CardFooter>
@@ -102,6 +132,28 @@ const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
           </GridItem>
         </Grid>
       </Card>
+
+      {isAboutModalOpen && (
+        <AboutModal
+          isOpen={isAboutModalOpen}
+          onClose={closeAboutModal}
+          trademark="Trademark and stuff"
+          brandImageSrc={logoUrl}
+          brandImageAlt="Guitar Image"
+          productName={name}
+          backgroundImageSrc={url}>
+          <TextContent>
+            <TextList component="dl">
+              <TextListItem component="dt">Name: </TextListItem>
+              <TextListItem component="dd">{name}</TextListItem>
+              <TextListItem component="dt">Description: </TextListItem>
+              <TextListItem component="dd">{description}</TextListItem>
+              <TextListItem component="dt">Price: </TextListItem>
+              <TextListItem component="dd">{price}</TextListItem>
+            </TextList>
+          </TextContent>
+        </AboutModal>
+      )}
 
       {isFormModalOpen && (
         <Modal
@@ -167,26 +219,23 @@ const GuitarInfo = ({ id, name, url, price, description, getGuitars }) => {
         </Modal>
       )}
 
-      {isAboutModalOpen && (
-        <AboutModal
-          isOpen={isAboutModalOpen}
-          onClose={closeAboutModal}
-          trademark="Trademark and stuff"
-          brandImageSrc={logoUrl}
-          brandImageAlt="Guitar Image"
-          productName={name}
-          backgroundImageSrc={url}>
-          <TextContent>
-            <TextList component="dl">
-              <TextListItem component="dt">Name: </TextListItem>
-              <TextListItem component="dd">{name}</TextListItem>
-              <TextListItem component="dt">Description: </TextListItem>
-              <TextListItem component="dd">{description}</TextListItem>
-              <TextListItem component="dt">Price: </TextListItem>
-              <TextListItem component="dd">{price}</TextListItem>
-            </TextList>
-          </TextContent>
-        </AboutModal>
+      {isDeleteModalOpen && (
+        <Modal
+          variant={ModalVariant.small}
+          title="Delete Confirmation"
+          isOpen={isDeleteModalOpen}
+          onClose={closeDeleteModal}
+          actions={[
+            <Button key="confirm" variant="danger" onClick={destroyGuitar}>
+              Delete Guitar
+            </Button>,
+            <Button key="cancel" variant="secondary" isDanger onClick={closeDeleteModal}>
+              Cancel
+            </Button>
+          ]}>
+          {`Are you sure you want to delete the guitar "${name}"?
+          This action cannot be undone`}
+        </Modal>
       )}
     </GalleryItem>
   );
